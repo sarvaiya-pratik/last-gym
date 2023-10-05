@@ -7,6 +7,7 @@ import {
   Stack,
   Text,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -22,14 +23,29 @@ const AllUsers = () => {
   // const { data } = useSelector((store) => store.admin);
 //  const { data } = useSelector((store) => store.admin);
 const [data,setData] = useState()
+const [reload,setReload] = useState(true)
+const toast = useToast()
 useEffect(()=>{
   axios.get("http://localhost:8080/user")
   .then((r)=>{
     setData(r.data)
     console.log(r.data)
   })
-},[])
- 
+},[reload])
+
+const handleDelete = (id) =>{
+  console.log("id",id)
+  axios.delete(`http://localhost:8080/user/${id}`)
+      .then((r)=>{
+          toast({
+              status:"success",
+              title:r.data,
+              duration:3000,
+              isClosable: true
+          })
+          setReload(!reload)
+      })
+    }
 
   return (
     <VStack p={5}  maxW="1200px">
@@ -88,6 +104,7 @@ useEffect(()=>{
                 borderRadius={50}
                 variant="link"
                 //onClick={toggleColorMode}
+                onClick={()=>handleDelete(el._id)}
                 icon={<IoTrashBinSharp />}
               />
             </HStack>

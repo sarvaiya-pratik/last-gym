@@ -40,7 +40,7 @@ const UserDashboard = () => {
          maxW="600px"
         >
           <Box w={{ base: "100%", sm: "40%", md: "50%", lg: "40%" }}>
-            <Img src="https://i.im.ge/2022/07/29/FwZXw1.jpg" />
+            <Img src="https://cdn.icon-icons.com/icons2/2468/PNG/512/user_icon_149329.png" />
           </Box>
           <VStack align={"flex-start"}
           color="white">

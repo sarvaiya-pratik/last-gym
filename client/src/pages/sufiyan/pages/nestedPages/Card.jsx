@@ -49,7 +49,7 @@ const CartCard = ({image, productName, price, _id}) => {
         onClick={moveToCart}
         colorScheme={"orange"} _hover={{bg:"white", border:"1px solid orange",color:"orange.500"}} >Move to Cart</Button>
 
-      
+        
     </VStack>
   )
 }

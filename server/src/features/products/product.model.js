@@ -3,6 +3,7 @@ const file = {
   productName: { type: String, require: true },
   image: { type: String, require: true },
   price: { type: String, require: true },
+  desc:{type:String},
   qty: { type: Number },
 };
 const productSchema = new mongoose.Schema(file, { versionKey: false });

@@ -26,8 +26,19 @@ const OrderSummaryItem = (props) => {
 };
 
 export const CartOrderSummary = () => {
+  const [qty,setQty] = React.useState(1)
+  React.useEffect(()=>{
+    const updateqty = userData.cart[0].qty
+    let newqty
+   {
+    updateqty ? newqty = updateqty: newqty = 1
+   }
+   setQty(newqty)
+  },[qty])
+
   const {userData, token, isAuth } = useSelector((store) => store.auth);
   const total = userData.cart.reduce((a, b) => a + +b.price, 0);
+
 
  
 const PaymentKaro = ()=>{
@@ -39,7 +50,8 @@ const PaymentKaro = ()=>{
       <Heading size="md" color={"white"}>Order Summary</Heading>
 
       <Stack spacing="6">
-        <OrderSummaryItem label="Subtotal" value={formatPrice(total*2)} />
+        {/* <OrderSummaryItem label="Subtotal" value={formatPrice(total*2)} /> */}
+        <OrderSummaryItem label="Subtotal" value={formatPrice(qty ? total * qty : total)} />
         <OrderSummaryItem label="Shipping + Tax">
           <Link href="#" color={"#f45f02"} _hover={{color:"white"}} textDecor="underline">
             Calculate shipping
@@ -55,7 +67,8 @@ const PaymentKaro = ()=>{
             Total
           </Text>
           <Text color={"white"} fontSize="xl" fontWeight="extrabold">
-            {formatPrice(total)}
+            {/* $ {qty ? total * qty : total}.00 */}
+            {formatPrice(qty ? total * qty : total)}
           </Text>
         </Flex>
       </Stack>

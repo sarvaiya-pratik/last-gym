@@ -15,6 +15,7 @@ import AboutUS from "../pages/monu/pages/About";
 import AdminDashbord from "../pages/sufiyan/pages/AdminDashbord";
 import AddProduct from "../pages/sufiyan/pages/nestedPages/AddProduct";
 import AllUsers from "../pages/sufiyan/pages/nestedPages/AllUsers";
+import Products from "../pages/sufiyan/pages/nestedPages/Products";
 import Dashborad from "../pages/sufiyan/pages/nestedPages/Dashborad";
 import AdminPrivateAuth from "./AdminPrivateRoute";
 import PrivateRoute from "./PrivateRoute";
@@ -109,6 +110,15 @@ const AllRoutes = () => {
             element={
               <AdminPrivateAuth>
                 <AllUsers />{" "}
+              </AdminPrivateAuth>
+            }
+          />
+           <Route
+            exact
+            path="products"
+            element={
+              <AdminPrivateAuth>
+                <Products />{" "}
               </AdminPrivateAuth>
             }
           />

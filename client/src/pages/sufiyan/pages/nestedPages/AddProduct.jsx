@@ -16,12 +16,13 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { ACTION_ADD_PRODUCT } from "../../../../redux/admin/admin.actions";
+import axios from "axios";
 //import { ACTION_ADD_PRODUCT } from "../../redux/admin/admin.actions";
 
 const AddProduct = () => {
   const [resize, setResize] = React.useState("horizontal");
 
-  let [data, setData] = useState()
+  let [data, setData] = useState({pname:"",desc:"",imgurl:"",price:""})
 
 
   const dispatch = useDispatch();
@@ -32,6 +33,8 @@ const AddProduct = () => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   }
+
+  
   // const AddToDatabase = () => {
   //   dispatch(ACTION_ADD_PRODUCT(area))
   //     .then((res) => {
@@ -46,7 +49,28 @@ const AddProduct = () => {
   //   //setarea("");
   // };
   const AddToDatabase = () => {
-      
+      axios.post("http://localhost:8080/products",data)
+      .then((r)=>{
+       if (r.status == 200){
+        setData({pname:"",desc:"",imgurl:"",price:""})
+        
+        toast({
+          title:r.data,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        })
+       }
+       else{
+          toast({
+            title:r.data,
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          })
+        }
+      })
+     
   };
 
   return (
@@ -76,6 +100,7 @@ const AddProduct = () => {
               width="650px"
               color="white"
               name="pname"
+              value={data.pname}
               onChange={handleChange}
               resize={resize}
             />
@@ -86,7 +111,7 @@ const AddProduct = () => {
               placeholder="Product Description"
               height={"110px"}
               width="650px"
-
+              value={data.desc}
               color="white"
               name="desc"
               onChange={handleChange}
@@ -99,7 +124,7 @@ const AddProduct = () => {
               placeholder="Enter Img URL"
               // height={"200px"}
               width="650px"
-
+              value={data.imgurl}
               color="white"
               name="imgurl"
               onChange={handleChange}
@@ -112,7 +137,7 @@ const AddProduct = () => {
               placeholder="Enter Price"
               // height={"200px"}
               width="650px"
-
+        value={data.price}
               color="white"
               name="price"
               onChange={handleChange}

@@ -13,24 +13,24 @@ import { CartProductMeta } from "./CartProductMeta";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_GET_CART, ACTION_REMOVE_ITEM_CART } from "../../../../redux/cart/cart.actions"
 import { getUserData } from "../../../../redux/auth/auth.actions";
-const QuantitySelect = (props) => {
-  return (
-    <Select
-    color={"white"}
-    bg="#f45f02"
-    _hover={{color:"#f45f02",bg:"white"}}
-      maxW="64px"
-      aria-label="Select quantity"
-      focusBorderColor={useColorModeValue("blue.500", "blue.200")}
-      {...props}
-    >
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </Select>
-  );
-};
+// const QuantitySelect = (props) => {
+//   return (
+//     <Select
+//     color={"white"}
+//     bg="#f45f02"
+//     _hover={{color:"#f45f02",bg:"white"}}
+//       maxW="64px"
+//       aria-label="Select quantity"
+//       focusBorderColor={useColorModeValue("blue.500", "blue.200")}
+//       {...props}
+//     >
+//       <option value="1">1</option>
+//       <option value="2">2</option>
+//       <option value="3">3</option>
+//       <option value="4">4</option>
+//     </Select>
+//   );
+// };
 
 export const CartItem = (props) => { 
   //console.log(1)
@@ -46,9 +46,19 @@ export const CartItem = (props) => {
     onClickDelete,
     _id
   } = props;
-  const { isAuth, token } = useSelector((store) => store.auth);
+  const {userData, isAuth, token } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const toast = useToast()
+  const [qty,setQty] = React.useState(1)
+
+  React.useEffect(()=>{
+    const updateqty = userData.cart[0].qty
+    let newqty
+   {
+    updateqty ? newqty = updateqty: newqty = 1
+   }
+   setQty(newqty)
+  },[qty])
 
   const itemDelete = () => {
 
@@ -99,12 +109,13 @@ export const CartItem = (props) => {
           md: "flex",
         }}
       >
-        <QuantitySelect
+        <label style={{color:"white"}}>{qty}</label>
+        {/* <QuantitySelect
           value={quantity}
           onChange={(e) => {
             onChangeQuantity?.(+e.currentTarget.value);
           }}
-        />
+        /> */}
         <PriceTag price={price} currency={currency} />
         <CloseButton color="#f45f02" _hover={{color:"white"}}
           aria-label={`Delete ${productName} from cart`}
@@ -126,12 +137,12 @@ export const CartItem = (props) => {
         <Link fontSize="sm" color={"#f45f02"} _hover={{color:"white"}} textDecor="underline">
           Delete
         </Link>
-        <QuantitySelect
+        {/* <QuantitySelect
           value={quantity}
           onChange={(e) => {
             onChangeQuantity?.(+e.currentTarget.value);
           }}
-        />
+        /> */}
         <PriceTag price={price} currency={currency} />
       </Flex>
     </Flex>

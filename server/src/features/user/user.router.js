@@ -58,7 +58,7 @@ app.post("/login", async (req, res) => {
   }
   const User = await UserModel.findOne({ email });
  // console.log(User)
- // if (!User) return res.status(404).send("User Not Found");
+ if (!User) return res.status(404).send("User Not Found");
 
   try {
     const match = bcrypt.compareSync(password, User.password);
@@ -366,6 +366,23 @@ app.post("/verify", async (req, res) => {
   }
 });
 
+app.delete("/:id", async (req, res) => {
+
+  const id = req.params.id
+  await UserModel.findByIdAndDelete({_id:id})
+  res.status(200).send("Deleted succesfully")
+  // try {
+  //   let exists = await productModel.findOneAndDeslete({
+  //     _id: req.params.id,
+  //   });
+
+  //   console.log(exists, req.params.id);
+
+  //   res.status(200).send("Product deleted successfully");
+  // } catch (e) {
+  //   res.send(e.massage);
+  // }
+});
 
 
 

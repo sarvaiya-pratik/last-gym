@@ -1,3 +1,4 @@
+import { Toast } from "@chakra-ui/react";
 import {
   LOGIN_ERROR,
   LOGIN_REQUEST,
@@ -38,7 +39,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
       };
     }
     case LOGIN_SUCCESS: {
-      alert("hyy")
+      // mil ja
       localStorage.setItem("token", JSON.stringify(payload));
       return {
         ...state,

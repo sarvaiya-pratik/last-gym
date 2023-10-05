@@ -41,9 +41,7 @@ const ProductPage = () => {
   const { userData, isAuth, AdminIsAuth } = useSelector((store) => store.auth);
   //console.log(product.data, "from selector");
 
-  useEffect(() => {
-  console.log("tushal",product)
-  }, []);
+
 
 
   const DeleteProduct = (id)=>{
@@ -162,8 +160,8 @@ const ProductPage = () => {
                   boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
                   borderRadius="10px"
                   maxW="xs"
-               
                   bg="whiteAlpha.300"
+                
                   // _dark={{
                   //   bg: "gray.800",
                   // }}
@@ -188,22 +186,23 @@ const ProductPage = () => {
                    
                       fontSize="sm"
                       color="white"
+                      textAlign={"center"}
                       _dark={{
                         color: "gray.400",
                       }}
                       z-index={2}
                     >
-                      Lorem ipsum dolor sit amet consectetur
+                     {item.desc}
                     </chakra.p>
                   </Box>
-                  <Box w="100%"  >
+                  <Box   >
                     <Link to={`/products/${item._id}`}>
                       <Image
                      
                        
                         fit="cover"
-                   
-                        src="https://picsum.photos/200"
+                       
+                        src={item.image}
                         // src={item.image}
                         alt="NIKE AIR"
                       />

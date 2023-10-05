@@ -1,6 +1,6 @@
 import "./Sidebar.css";
 import { motion } from "framer-motion";
-import {AiOutlineBars} from "react-icons/ai";
+import {AiOutlineAppstoreAdd, AiOutlineBars} from "react-icons/ai";
 
 import { MdDashboard 
 } from "react-icons/md"
@@ -111,7 +111,7 @@ function SideBarLeft() {
             }}
           >
             <img
-              src="https://i.im.ge/2022/07/29/FwZXw1.jpg"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQjsjmJd241ONF1n75orvMBxHffqxuoyVeDtCDfgysAoB44Mnp5XInwuxg0GUojKQqPB0&usqp=CAU"
               alt="profile_img"
             />
           </motion.div>
@@ -135,7 +135,7 @@ function SideBarLeft() {
             >
               Content
             </motion.h3>
-            <Item icon={<GiReceiveMoney />} name="Sales" />
+            <Link to="/admin/products"> <Item icon={<AiOutlineAppstoreAdd />} name="Products" /></Link>
 
             <Link to="/admin/all-users">  <Item icon={<FaUsers />} name="Customers" /></Link>
           </div>

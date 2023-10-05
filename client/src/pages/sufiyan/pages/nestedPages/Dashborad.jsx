@@ -3,9 +3,17 @@ import hello from "../../assets/hello.svg";
 import Chart from "../../components/Chart";
 import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Dashborad = () => {
+  const [mydata,setMydata] = useState()
+  useEffect(()=>{
+    axios.get("http://localhost:8080/user")
+      .then((r)=>{
+        setMydata(r.data)
+      })
+  },[])
   const { data, loading, error } = useSelector((store) => store.product);
 
   const { data: adminData } = useSelector((store) => store.admin);
@@ -60,7 +68,8 @@ console.log(pending_sales.toFixed(1), sales_revenue)
             <div className="card_inner">
               <p className="text-primary-p">Number of Users</p>
               <span className="font-bold text-title">
-                {adminData.users.length}
+                {/* {adminData.users.length} */}
+          {mydata ? mydata.length : 0}
               </span>
             </div>
           </div>
